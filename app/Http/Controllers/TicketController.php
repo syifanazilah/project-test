@@ -10,13 +10,14 @@ use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
-class AgentController extends Controller
+class TicketController extends Controller
 {
+
     public function index()
     {
         $tickets = Ticket::with(['category', 'priority', 'labels'])->paginate(10);
-        
-        return view('agent.dashboard', compact('tickets'));
+
+        return view('dashboard', compact('tickets'));
     }
 
 
@@ -60,6 +61,6 @@ class AgentController extends Controller
             'labels_id' => $request->labels_id,
         ]);
 
-        return redirect()->route('agent.dashboard')->with(['success' => 'Ticket created successfully!']);
+        return redirect()->route('dashboard')->with(['success' => 'Ticket created successfully!']);
     }
 }
